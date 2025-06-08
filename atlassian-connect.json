@@ -1,7 +1,7 @@
 {
   "key": "po-assist-agent",
   "name": "PO Assist Agent",
-  "baseUrl": "https://po-assist-agent.up.railway.app",
+  "baseUrl": "po-assist-agent-railway-production.up.railway.app",
   "authentication": {
     "type": "none"
   },

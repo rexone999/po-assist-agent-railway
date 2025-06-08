@@ -1,7 +1,7 @@
 {
   "key": "po-assist-agent",
   "name": "PO Assist Agent",
-  "baseUrl": "https://your-app-url.onrender.com",
+  "baseUrl": "https://po-assist-agent.up.railway.app",
   "authentication": {
     "type": "none"
   },

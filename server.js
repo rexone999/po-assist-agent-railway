@@ -9,7 +9,10 @@ app.get('/atlassian-connect.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.sendFile(path.join(__dirname, 'atlassian-connect.json'));
 });
-
+app.post('/installed', (req, res) => {
+  console.log('✅ App installed by Jira');
+  res.sendStatus(204); // 204 No Content is expected
+});
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });

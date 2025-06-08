@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 app.use(express.static(__dirname));
 
 app.get('/atlassian-connect.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   res.sendFile(path.join(__dirname, 'atlassian-connect.json'));
 });
 

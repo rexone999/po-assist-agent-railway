@@ -20,3 +20,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`✅ Server running on http://localhost:${port}`);
 });
+app.get('/', (req, res) => {
+  res.send('<h1>🎯 PO Assist Agent is Live!</h1><p>You can start building features now.</p>');
+});

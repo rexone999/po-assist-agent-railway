@@ -1,28 +1,27 @@
-require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { chat } = require('./utils/openrouter');
+require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
-});
-
+// POST /chat - receives prompt, sends response
 app.post('/chat', async (req, res) => {
   const prompt = req.body.prompt;
   try {
-    const response = await chat(prompt);
-    res.json({ reply: response });
+    const reply = await chat(prompt);
+    res.json({ reply });
   } catch (err) {
-    res.status(500).json({ reply: "AI error." });
+    console.error('Chat error:', err);
+    res.status(500).json({ reply: 'Something went wrong!' });
   }
 });
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });

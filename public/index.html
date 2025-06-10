@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Chatbot in Jira</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #chat-box { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; }
+    .user { color: blue; margin: 5px 0; }
+    .bot { color: green; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <h2>Ask the PO‑Assist AI:</h2>
+  <div id="chat-box"></div>
+  <input type="text" id="user-input" placeholder="Type a message…" style="width: 80%;" />
+  <button onclick="sendMessage()">Send</button>
+  <script>
+    async function sendMessage() {
+      const inputEl = document.getElementById('user-input');
+      const input = inputEl.value;
+      if (!input) return;
+      document.getElementById('chat-box').innerHTML += `<div class="user"><b>You:</b> ${input}</div>`;
+      inputEl.value = '';
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({prompt: input}),
+        });
+        const json = await res.json();
+        document.getElementById('chat-box').innerHTML += `<div class="bot"><b>AI:</b> ${json.reply}</div>`;
+      } catch(e) {
+        document.getElementById('chat-box').innerHTML += `<div class="bot"><b>AI:</b> Error contacting model.</div>`;
+      }
+      document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+    }
+  </script>
+</body>
+</html>

@@ -1,14 +1,18 @@
 {
   "development": {
     "store": {
-      "adapter": "memory"
+      "adapter": "sequelize",
+      "dialect": "sqlite",
+      "storage": ":memory:"
     },
     "localBaseUrl": "http://localhost:3000",
     "product": "jira"
   },
   "production": {
     "store": {
-      "adapter": "memory"
+      "adapter": "sequelize",
+      "dialect": "sqlite",
+      "storage": ":memory:"
     },
     "localBaseUrl": "https://po-assist-agent-railway-production-9f25.up.railway.app",
     "product": "jira"

@@ -12,6 +12,7 @@
     "read",
     "write"
   ],
+  "apiVersion": 1,
   "modules": {
     "generalPages": [
       {
@@ -20,8 +21,12 @@
         "name": {
           "value": "PO Assistant"
         },
-        "url": "/",
-        "conditions": []
+        "url": "/index.html",
+        "conditions": [
+          {
+            "condition": "user_is_logged_in"
+          }
+        ]
       }
     ]
   }

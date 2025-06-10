@@ -1,0 +1,16 @@
+{
+  "development": {
+    "store": {
+      "adapter": "memory"
+    },
+    "localBaseUrl": "http://localhost:3000",
+    "product": "jira"
+  },
+  "production": {
+    "store": {
+      "adapter": "memory"
+    },
+    "localBaseUrl": "https://po-assist-agent-railway.onrender.com",
+    "product": "jira"
+  }
+}

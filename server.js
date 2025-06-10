@@ -6,45 +6,36 @@ const ace = require('atlassian-connect-express');
 const { chat } = require('./utils/gemini');
 
 const app = express();
-const addon = ace(app);         // Initialize Atlassian Connect Express
-addon.configure(app);          // ⚠️ Required to configure ACE
-
+const addon = ace(app);
 const PORT = process.env.PORT || 3000;
 
-// Parse JSON bodies
 app.use(bodyParser.json());
-
-// Serve static files from /public
+app.use(addon.middleware()); // Important for Atlassian Connect
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Middleware from ACE for auth & security
-app.use(addon.middleware());
-
-// Serve connect.json descriptor
+// Serve descriptor
 app.get('/atlassian-connect.json', (req, res) => {
   res.type('application/json');
   res.sendFile(path.join(__dirname, 'atlassian-connect.json'));
 });
 
-// Lifecycle callback on install
+// Lifecycle endpoint
 app.post('/installed', addon.authenticate(), (req, res) => {
-  console.log('✅ Installed:', req.body);
-  res.sendStatus(204);
+  console.log('✅ App installed:', req.body);
+  res.sendStatus(200);
 });
 
-// Chat AI endpoint (no auth)
+// Chatbot route
 app.post('/chat', async (req, res) => {
-  const prompt = req.body.prompt;
   try {
-    const reply = await chat(prompt);
+    const reply = await chat(req.body.prompt);
     res.json({ reply });
-  } catch (err) {
-    console.error('❌ Gemini error:', err);
-    res.status(500).json({ reply: 'Sorry, could not generate a response.' });
+  } catch (error) {
+    console.error('❌ Error in chatbot:', error.message);
+    res.status(500).json({ reply: 'AI Error' });
   }
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
 });

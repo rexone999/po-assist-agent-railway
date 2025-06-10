@@ -1,7 +1,7 @@
 {
   "key": "po-assist-agent",
   "name": "PO Assist Agent",
-  "baseUrl": "https://po-assist-agent-gemini-production-1766.up.railway.app",
+  "baseUrl": "https://po-assist-agent-railway.onrender.com",
   "authentication": {
     "type": "none"
   },

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const { chat } = require('./utils/gemini');
+const { chat } = require('./utils/openrouter');
 require('dotenv').config();
 
 const app = express();

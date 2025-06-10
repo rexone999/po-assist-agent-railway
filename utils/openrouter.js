@@ -2,6 +2,7 @@ const axios = require('axios');
 require('dotenv').config(); // Load .env variables
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+console.log("Loaded API Key:", process.env.OPENROUTER_API_KEY);
 
 async function chat(prompt) {
   try {

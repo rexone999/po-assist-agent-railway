@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PO Assist Chatbot</title>
-  <script src="chatbot.js" defer></script>
-  <style>
-    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
-    #chat-output { height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #fff; margin-bottom: 10px; }
-    input[type="text"] { width: 80%; padding: 10px; }
-    button { padding: 10px; }
-  </style>
+  <title>PO-Assist Agent Chat</title>
 </head>
 <body>
-  <h2>Product Owner Assist Chatbot 🤖</h2>
-  <div id="chat-output"></div>
-  <form id="chat-form">
-    <input id="user-input" type="text" placeholder="Ask me anything about Jira user stories..." required />
-    <button type="submit">Send</button>
-  </form>
+  <h2>PO-Assist Chatbot</h2>
+  <div id="chat-box"></div>
+  <input type="text" id="prompt" placeholder="Ask something..." />
+  <button onclick="send()">Send</button>
+
+  <script>
+    async function send() {
+      const prompt = document.getElementById("prompt").value;
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      const chatBox = document.getElementById("chat-box");
+      chatBox.innerHTML += `<p><strong>You:</strong> ${prompt}</p>`;
+      chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.reply}</p>`;
+      document.getElementById("prompt").value = "";
+    }
+  </script>
 </body>
 </html>

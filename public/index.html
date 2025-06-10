@@ -1,39 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Chatbot in Jira</title>
+  <title>PO Assist Chatbot</title>
+  <script src="chatbot.js" defer></script>
   <style>
-    body { font-family: Arial; padding: 20px; }
-    #chat-box { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; }
-    .user { color: blue; margin: 5px 0; }
-    .bot { color: green; margin: 5px 0; }
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    #chat-output { height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #fff; margin-bottom: 10px; }
+    input[type="text"] { width: 80%; padding: 10px; }
+    button { padding: 10px; }
   </style>
 </head>
 <body>
-  <h2>Ask the PO‑Assist AI:</h2>
-  <div id="chat-box"></div>
-  <input type="text" id="user-input" placeholder="Type a message…" style="width: 80%;" />
-  <button onclick="sendMessage()">Send</button>
-  <script>
-    async function sendMessage() {
-      const inputEl = document.getElementById('user-input');
-      const input = inputEl.value;
-      if (!input) return;
-      document.getElementById('chat-box').innerHTML += `<div class="user"><b>You:</b> ${input}</div>`;
-      inputEl.value = '';
-      try {
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({prompt: input}),
-        });
-        const json = await res.json();
-        document.getElementById('chat-box').innerHTML += `<div class="bot"><b>AI:</b> ${json.reply}</div>`;
-      } catch(e) {
-        document.getElementById('chat-box').innerHTML += `<div class="bot"><b>AI:</b> Error contacting model.</div>`;
-      }
-      document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
-    }
-  </script>
+  <h2>Product Owner Assist Chatbot 🤖</h2>
+  <div id="chat-output"></div>
+  <form id="chat-form">
+    <input id="user-input" type="text" placeholder="Ask me anything about Jira user stories..." required />
+    <button type="submit">Send</button>
+  </form>
 </body>
 </html>

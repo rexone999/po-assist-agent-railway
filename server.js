@@ -7,19 +7,18 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from public/
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Parse incoming JSON requests
+// JSON parsing
 app.use(bodyParser.json());
 
-// 🔹 Serve the Atlassian Connect descriptor
+// Descriptor route
 app.get('/atlassian-connect.json', (req, res) => {
   res.sendFile(path.join(__dirname, 'atlassian-connect.json'));
 });
 
-
-// 🔹 Endpoint to handle chat prompt from frontend
+// AI chat route
 app.post('/chat', async (req, res) => {
   const prompt = req.body.prompt;
 
@@ -32,7 +31,6 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });

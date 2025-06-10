@@ -17,6 +17,10 @@ app.use(bodyParser.json());
 app.get('/atlassian-connect.json', (req, res) => {
   res.sendFile(path.join(__dirname, 'atlassian-connect.json'));
 });
+app.post('/installed', (req, res) => {
+  console.log('✅ App installed by Jira');
+  res.sendStatus(204); // 204 No Content is expected
+});
 
 // 🔹 Endpoint to handle chat prompt from frontend
 app.post('/chat', async (req, res) => {

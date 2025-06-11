@@ -5,7 +5,14 @@ const path = require('path');
 const ace = require('atlassian-connect-express');
 
 const app = express();
-const addon = ace(app);
+const addon = ace(app, {
+  config: {
+    store: {
+      adapter: 'memory'
+    }
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 

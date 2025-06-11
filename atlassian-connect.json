@@ -1,27 +1,24 @@
 {
   "key": "po-assist-agent",
   "name": "PO Assist Agent",
-  "baseUrl": "po-assist-agent-railway-production-9f25.up.railway.app",
+  "baseUrl": "https://po-assist-agent-railway-production-9f25.up.railway.app",  // Replace with actual Railway HTTPS URL
   "authentication": {
-    "type": "none"
+    "type": "jwt"
   },
   "lifecycle": {
-    "installed": "/installed"
+    "installed": "/installed",
+    "uninstalled": "/uninstalled"
   },
-  "scopes": [
-    "read",
-    "write"
-  ],
-  "apiVersion": 1,
+  "scopes": ["write", "read", "act_as_user"],
   "modules": {
     "generalPages": [
       {
-        "key": "po-assist-page",
+        "key": "chat-page",
         "location": "system.top.navigation.bar",
         "name": {
-          "value": "PO Assistant"
+          "value": "PO Chat"
         },
-        "url": "/index.html",
+        "url": "/chat",
         "conditions": [
           {
             "condition": "user_is_logged_in"
